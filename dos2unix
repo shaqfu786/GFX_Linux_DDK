@@ -1,0 +1,24 @@
+#!/bin/bash
+#
+# Alternative dos2unix solution written in shell script
+# Copyright 2011 by kihyung2.lee@lge.com
+# 13th April, 2011
+
+for arg in $@
+do
+    if [ "${arg:0:1}" != "-" ]; then
+        CONV_FILE="$arg"
+        break
+    fi
+done
+
+if [ "$CONV_FILE" ]; then
+    TEMP_FILE=`mktemp`
+
+    cp ${CONV_FILE} ${TEMP_FILE}
+    tr -d "\r" < ${TEMP_FILE} > ${CONV_FILE}
+    rm ${TEMP_FILE}
+else
+    tr -d "\r"
+fi
+

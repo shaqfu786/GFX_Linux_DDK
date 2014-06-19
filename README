@@ -1,0 +1,148 @@
+-------------------------------------------------------------------------------
+    Texas Instruments OMAP(TM) Platform Software
+    (c) Copyright 2011 Texas Instruments Incorporated. All Rights Reserved.
+    (c) Copyright 2002-2011 by Imagination Technologies Ltd. All Rights Reserved.
+
+    Use of this software is controlled by the terms and conditions found
+    in the license agreement under which this software has been supplied.
+-------------------------------------------------------------------------------
+
+
+ABOUT
+-----
+
+This is the Android SGX DDK UM version 1.8. This DDK contains the
+implementation of the different APIs supported by the graphics core including
+OGLES 2.0, OGLES 1.1 and EGL 1.4, as well as components required for the
+communication with the Android system.
+
+
+BUILD
+-----
+
+Before attempting to build the DDK, please make sure you have an Android
+environment successfully built.  A build script is provided to build the DDK.
+
+First, setup your Android build environment, where 'myandroidtree' is the
+directory containing a built Android repo:
+
+    $ cd ~/src/myandroidtree
+    $ source build/envsetup.sh
+    $ lunch
+
+    You're building on Linux
+
+    Lunch menu... pick a combo:
+         1. full-eng
+         2. full_x86-eng
+         3. vbox_x86-eng
+         4. full_maguro-userdebug
+         5. full_tuna-userdebug
+         6. blaze_tablet-userdebug
+         7. blaze_tablet-eng
+         8. full_blaze-userdebug
+         9. full_blaze-eng
+         10. full_panda-eng
+
+    Which would you like? [full-eng]
+
+Select a product e.g. blaze_tablet
+    $ 7
+
+Run the script to build the DDK
+
+    $ ./build_DDK.sh --build release
+
+To build the DDK for a specific SGX core:
+
+    $ ./build_DDK.sh -g [540|544sc|544] --build release
+
+The output binaries will have SGXCORE and SGX_CORE_REV appended
+to the name. The library version and SGX core must match.
+Libraries built for SGX540 will not work for SGX544sc.
+
+    e.g.: libIMGegl_SGX544_112.so     for OMAP4470 SGX 544sc
+          libIMGegl_SGX540_120.so     for OMAP4430/60 SGX 540
+
+You can also build the DDK in debug mode, both kernel and user components need
+to be built in this mode
+
+    $ ./build_DDK.sh --build debug
+
+To delete the object files and binaries created:
+
+    $ ./build_DDK.sh --build release clobber
+
+See also
+
+    $ ./build_DDK.sh --help
+
+INSTALL
+-------
+
+Install will copy built DDK binaries to an Android file-system layout
+location.
+
+If you followed the build steps described above:
+
+    $ ./build_DDK.sh -g [540|544sc|544] --install release
+
+To choose which version of SGX libraries to install you must to pass
+the TARGET_SGX flag. Default is SGX540 OMAP4430/60
+
+Will install the DDK binaries in:
+
+    ~src/myandroidtree/out/target/product/blaze_tablet
+
+You can create a new Android system image with the binaries included with:
+
+    $ cd ~/src/myandroidtree
+    $ make snod
+
+You would need to reflash the system image on the target
+
+DDK binaries can be installed to an arbitrary location by setting DISCIMAGE
+
+    $ DISCIMAGE=/tmp/bins ./build_DDK.sh --install release
+
+Install of the binaries on the target can be achieved with:
+    $ cd /tmp/bins/
+    $ adb root
+    $ adb remount
+    $ adb push system /system/
+    $ adb push data /data/
+
+Debug builds
+------------
+
+A debug build is performed with the following, ensure the Android FS build
+environment is set up as mentioned above:
+
+    $ ./build_DDK.sh --build debug
+    $ ./build_DDK.sh --install debug
+
+At this point you either need to either recreate the system image and push it
+to the target:
+
+    $ cd ~/src/myandroidtree
+    $ make snod; # For an existing built Android repo
+    $ adb reboot-bootloader; # Put target into fastboot mode
+    $ fastboot flash system
+
+Or you can push the DDK bins (fastest)
+
+    $ mkdir /tmp/ddkbins
+    $ DISCIMAGE=/tmp/ddkbins ./build_DDK.sh --install debug
+    $ cd /tmp/ddkbins
+    $ adb root
+    $ adb remount
+    $ adb push data/ data/
+    $ adb push system/ system/
+    $ adb shell sync
+    $ adb reboot
+
+Support
+-------
+
+omap_gfx_android@list.ti.com
+

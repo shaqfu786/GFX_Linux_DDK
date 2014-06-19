@@ -1,0 +1,1146 @@
+#line 1 "services4/srvclient/devices/sgx/subtwiddled_eot.asm"
+#line 1 "/home001/myeonggyu.son/omap_ics_release_4AI.1.2_2/android/vendor/ti/GFX_Linux_DDK/eurasia//"
+#line 1 "<built-in>"
+#line 1 "<command-line>"
+#line 1 "./eurasiacon/binary2_540_omap4430_android_release/config.h" 1
+#line 1 "<command-line>" 2
+#line 1 "services4/srvclient/devices/sgx/subtwiddled_eot.asm"
+#line 33 "services4/srvclient/devices/sgx/subtwiddled_eot.asm"
+#line 1 "hwdefs/sgxdefs.h" 1
+#line 30 "hwdefs/sgxdefs.h"
+#line 1 "hwdefs/sgxerrata.h" 1
+#line 31 "hwdefs/sgxdefs.h" 2
+#line 1 "hwdefs/sgxfeaturedefs.h" 1
+#line 766 "hwdefs/sgxfeaturedefs.h"
+#line 1 "include4/img_types.h" 1
+#line 39 "include4/img_types.h"
+typedef unsigned int IMG_UINT, *IMG_PUINT;
+typedef signed int IMG_INT, *IMG_PINT;
+
+typedef unsigned char IMG_UINT8, *IMG_PUINT8;
+typedef unsigned char IMG_BYTE, *IMG_PBYTE;
+typedef signed char IMG_INT8, *IMG_PINT8;
+typedef char IMG_CHAR, *IMG_PCHAR;
+
+typedef unsigned short IMG_UINT16, *IMG_PUINT16;
+typedef signed short IMG_INT16, *IMG_PINT16;
+
+typedef unsigned int IMG_UINT32, *IMG_PUINT32;
+typedef signed int IMG_INT32, *IMG_PINT32;
+#line 62 "include4/img_types.h"
+typedef unsigned __int64 IMG_UINT64, *IMG_PUINT64;
+typedef __int64 IMG_INT64, *IMG_PINT64;
+#line 76 "include4/img_types.h"
+typedef float IMG_FLOAT, *IMG_PFLOAT;
+typedef double IMG_DOUBLE, *IMG_PDOUBLE;
+
+
+typedef enum tag_img_bool
+{
+ IMG_FALSE = 0,
+ IMG_TRUE = 1,
+ IMG_FORCE_ALIGN = 0x7FFFFFFF
+} IMG_BOOL, *IMG_PBOOL;
+
+typedef void IMG_VOID, *IMG_PVOID;
+
+typedef IMG_INT32 IMG_RESULT;
+
+
+
+
+
+
+ typedef unsigned int IMG_UINTPTR_T;
+ typedef IMG_UINT32 IMG_SIZE_T;
+
+
+typedef IMG_PVOID IMG_HANDLE;
+
+typedef void** IMG_HVOID, * IMG_PHVOID;
+
+
+
+
+typedef IMG_UINT32 IMG_SID;
+
+typedef IMG_UINT32 IMG_EVENTSID;
+
+
+
+
+
+ typedef IMG_HANDLE IMG_S_HANDLE;
+#line 160 "include4/img_types.h"
+typedef IMG_PVOID IMG_CPU_VIRTADDR;
+
+
+typedef struct _IMG_DEV_VIRTADDR
+{
+
+ IMG_UINT32 uiAddr;
+
+
+} IMG_DEV_VIRTADDR;
+
+typedef IMG_UINT32 IMG_DEVMEM_SIZE_T;
+
+
+typedef struct _IMG_CPU_PHYADDR
+{
+
+ IMG_UINTPTR_T uiAddr;
+} IMG_CPU_PHYADDR;
+
+
+typedef struct _IMG_DEV_PHYADDR
+{
+
+
+ IMG_UINTPTR_T uiAddr;
+
+
+
+
+} IMG_DEV_PHYADDR;
+
+
+typedef struct _IMG_SYS_PHYADDR
+{
+
+ IMG_UINTPTR_T uiAddr;
+} IMG_SYS_PHYADDR;
+
+#line 1 "include4/img_defs.h" 1
+#line 33 "include4/img_defs.h"
+#line 1 "include4/img_types.h" 1
+#line 34 "include4/img_defs.h" 2
+
+typedef enum img_tag_TriStateSwitch
+{
+ IMG_ON = 0x00,
+ IMG_OFF,
+ IMG_IGNORE
+
+} img_TriStateSwitch, * img_pTriStateSwitch;
+#line 86 "include4/img_defs.h"
+typedef char TCHAR, *PTCHAR, *PTSTR;
+#line 200 "include4/img_types.h" 2
+#line 767 "hwdefs/sgxfeaturedefs.h" 2
+
+#line 1 "hwdefs/sgxcoretypes.h" 1
+#line 31 "hwdefs/sgxcoretypes.h"
+typedef enum
+{
+ SGX_CORE_ID_INVALID = 0,
+ SGX_CORE_ID_520 = 1,
+ SGX_CORE_ID_530 = 2,
+ SGX_CORE_ID_531 = 3,
+ SGX_CORE_ID_535 = 4,
+ SGX_CORE_ID_540 = 5,
+ SGX_CORE_ID_541 = 6,
+ SGX_CORE_ID_543 = 7,
+ SGX_CORE_ID_544 = 8,
+ SGX_CORE_ID_545 = 9,
+ SGX_CORE_ID_554 = 10
+} SGX_CORE_ID_TYPE;
+
+typedef struct _SGX_CORE_INFO
+{
+ SGX_CORE_ID_TYPE eID;
+ IMG_UINT32 uiRev;
+} SGX_CORE_INFO, *PSGX_CORE_INFO;
+
+typedef struct _SGX_CORE_BUGS
+{
+
+
+
+
+
+ IMG_UINT32 ui32Flags;
+} SGX_CORE_BUGS, *PSGX_CORE_BUGS;
+
+typedef struct _SGX_CORE_FEATURES
+{
+
+
+
+
+
+ IMG_UINT32 ui32Flags;
+ IMG_UINT32 ui32Flags2;
+
+
+
+ IMG_UINT32 ui32NumMutexes;
+
+
+
+ IMG_UINT32 ui32NumMonitors;
+
+
+
+ IMG_UINT32 ui32TextureStateSize;
+
+
+
+ IMG_UINT32 ui32IterationStateSize;
+
+
+
+ IMG_UINT32 ui32NumUSEPipes;
+
+
+
+
+ IMG_UINT32 ui32NumProgramCounterBits;
+
+
+
+ IMG_UINT32 ui32NumInternalRegisters;
+
+
+
+
+ IMG_UINT32 const* puInvalidSpecialRegistersForNonBitwiseCount;
+
+
+
+
+ IMG_UINT32 const* auInvalidSpecialRegistersForNonBitwise;
+
+
+
+ IMG_CHAR const* pszCoreName;
+} SGX_CORE_FEATURES, *PSGX_CORE_FEATURES;
+
+typedef struct _SGX_CORE_DESC
+{
+
+
+
+ SGX_CORE_ID_TYPE eCoreType;
+
+
+
+
+ IMG_UINT32 ui32CoreRevision;
+
+
+
+ SGX_CORE_BUGS sBugs;
+
+
+
+ const SGX_CORE_FEATURES* psFeatures;
+} SGX_CORE_DESC, *PSGX_CORE_DESC;
+typedef SGX_CORE_DESC const* PCSGX_CORE_DESC;
+#line 769 "hwdefs/sgxfeaturedefs.h" 2
+#line 32 "hwdefs/sgxdefs.h" 2
+#line 46 "hwdefs/sgxdefs.h"
+#line 1 "hwdefs/sgx540defs.h" 1
+#line 47 "hwdefs/sgxdefs.h" 2
+#line 369 "hwdefs/sgxdefs.h"
+#line 1 "hwdefs/sgx540usedefs.h" 1
+#line 370 "hwdefs/sgxdefs.h" 2
+#line 7656 "hwdefs/sgxdefs.h"
+#line 1 "hwdefs/sgxusespecialbankdefs.h" 1
+#line 7657 "hwdefs/sgxdefs.h" 2
+#line 34 "services4/srvclient/devices/sgx/subtwiddled_eot.asm" 2
+
+.export SubTwiddled;
+.export SubTwiddledEnd;
+.export PixelEventSubTwiddled_PBEState_Byte;
+
+
+
+.export PixelEventSubTwiddled_Sideband_SinglePipe_Byte;
+.export PixelEventSubTwiddled_Sideband_2Pipes_First_Byte;
+.export PixelEventSubTwiddled_Sideband_2Pipes_Second_Byte;
+
+.export PixelEventSubTwiddled_SubDim;
+#line 120 "services4/srvclient/devices/sgx/subtwiddled_eot.asm"
+.align 2;
+.skipinvon;
+SubTwiddled:
+{
+
+
+
+
+
+
+
+ PixelEventSubTwiddled_SubDim:
+ nop;
+ nop;
+
+ and r4, r7, #0xffff;
+ shr r5, r7, #16;
+
+ PixelEventSubTwiddled_PBEState_Byte:
+ nop;
+ nop;
+ nop;
+ nop;
+
+
+
+ nop;
+
+
+
+
+
+
+
+ mov r10, #0;
+ xor.testnz p0, r5, #(16U);
+ p0 xor.testnz p0, r5, #((16U) / 2);
+ p0 br PEST_WidthLessThanHalfTileFirst;
+ {
+
+
+
+  and r10, pa0, #~0xFFFFFF00U;
+
+  shr r10, r10, #(1 + 0);
+  br PEST_EndOfHalfTileTest;
+ }
+ PEST_WidthLessThanHalfTileFirst:
+ {
+
+
+
+
+  and r10, pa0, #~0xFFFF00FFU;
+
+  shr r10, r10, #(1 + 8);
+ }
+ PEST_EndOfHalfTileTest:
+#line 186 "services4/srvclient/devices/sgx/subtwiddled_eot.asm"
+ mov r7, #(1 << 30);
+
+
+
+
+
+ and.testnz p0, r6, r7;
+ p0 and.testnz p0, #2, g17;
+ p0 br PEST_EndOfAspectRatios;
+
+ and.testz p0, r6, r7;
+ p0 and.testnz p0, #1, g17;
+ p0 br PEST_EndOfAspectRatios;
+
+
+
+ xor.testnz p0, r5, #(16U);
+ p0 xor.testnz p0, r5, #((16U) / 2);
+ p0 br PEST_WidthLessThanHalfTile;
+ {
+  xor.testz p0, r4, #1;
+  p0 br PEST_EndOfAspectRatios;
+#line 217 "services4/srvclient/devices/sgx/subtwiddled_eot.asm"
+  xor.testz p0, r4, #(2); p0 br PEST_AspectRatio_8_x_2;;
+  xor.testz p0, r4, #(4); p0 br PEST_AspectRatio_8_x_4;;
+  xor.testz p0, r4, #(8); p0 br PEST_AspectRatio_8_x_8;;
+  xor.testz p0, r4, #(16); p0 br PEST_AspectRatio_8_x_16;;
+
+
+
+
+ }
+ PEST_WidthLessThanHalfTile:
+#line 244 "services4/srvclient/devices/sgx/subtwiddled_eot.asm"
+ xor.testz p0, r5, #4;
+ !p0 br PEST_WidthNot4;
+ {
+  xor.testz p0, r4, #1;
+  p0 br PEST_EndOfAspectRatios;
+  xor.testz p0, r4, #2;
+  p0 br PEST_AspectRatio_4_x_2;
+  xor.testz p0, r4, #16;
+
+
+
+  p0 br PEST_AspectRatio_4_x_16;
+ }
+ PEST_WidthNot4:
+
+ xor.testz p0, r5, #2;
+ !p0 br PEST_WidthNot2;
+ {
+  xor.testz p0, r4, #1;
+  p0 br PEST_EndOfAspectRatios;
+  xor.testz p0, r4, #8;
+  p0 br PEST_AspectRatio_2_x_8;
+  xor.testz p0, r4, #16;
+
+
+
+  p0 br PEST_AspectRatio_2_x_16;
+ }
+ PEST_WidthNot2:
+
+ xor.testz p0, r5, #1;
+ p0 br PEST_EndOfAspectRatios;
+
+ lock; lock;
+
+ PEST_AspectRatio_2_x_8:
+ {
+#line 299 "services4/srvclient/devices/sgx/subtwiddled_eot.asm"
+  mov r7, o1;
+  mov o1, o2;
+  mov o2, r7;
+
+  mov r7, o17;
+  mov o17, o18;
+  mov o18, r7;
+
+  mov r7, o33;
+  mov o33, o34;
+  mov o34, r7;
+
+  mov r7, o49;
+  mov o49, o50;
+  mov o50, r7;
+
+
+  br PEST_EndOfAspectRatios;
+ }
+ PEST_AspectRatio_2_x_16:
+ {
+#line 358 "services4/srvclient/devices/sgx/subtwiddled_eot.asm"
+  mov r7, o1;
+  mov o1, o2;
+  mov o2, r7;
+
+  mov r7, o17;
+  mov o17, o18;
+  mov o18, r7;
+
+  mov r7, o33;
+  mov o33, o34;
+  mov o34, r7;
+
+  mov r7, o49;
+  mov o49, o50;
+  mov o50, r7;
+
+  mov r7, o65;
+  mov o65, o66;
+  mov o66, r7;
+
+  mov r7, o81;
+  mov o81, o82;
+  mov o82, r7;
+
+  mov r7, o97;
+  mov o97, o98;
+  mov o98, r7;
+
+  mov r7, o113;
+  mov o113, o114;
+  mov o114, r7;
+
+
+  br PEST_EndOfAspectRatios;
+ }
+ PEST_AspectRatio_4_x_2:
+ {
+#line 407 "services4/srvclient/devices/sgx/subtwiddled_eot.asm"
+  mov r7, o1;
+  mov o1, o2;
+  mov o2, o4;
+  mov o4, r7;
+
+  mov r7, o5;
+  mov o5, o3;
+  mov o3, o6;
+  mov o6, r7;
+
+
+  br PEST_EndOfAspectRatios;
+ }
+ PEST_AspectRatio_4_x_16:
+ {
+#line 516 "services4/srvclient/devices/sgx/subtwiddled_eot.asm"
+  mov r7, o1;
+  mov o1, o2;
+  mov o2, o16;
+  mov o16, o4;
+  mov o4, r7;
+
+  mov r7, o5;
+  mov o5, o3;
+  mov o3, o18;
+  mov o18, o20;
+  mov o20, r7;
+
+  mov r7, o6;
+  mov o6, o17;
+  mov o17, r7;
+
+  mov r7, o7;
+  mov o7, o19;
+  mov o19, o22;
+  mov o22, o21;
+  mov o21, r7;
+
+  mov r7, o33;
+  mov o33, o34;
+  mov o34, o48;
+  mov o48, o36;
+  mov o36, r7;
+
+  mov r7, o37;
+  mov o37, o35;
+  mov o35, o50;
+  mov o50, o52;
+  mov o52, r7;
+
+  mov r7, o38;
+  mov o38, o49;
+  mov o49, r7;
+
+  mov r7, o39;
+  mov o39, o51;
+  mov o51, o54;
+  mov o54, o53;
+  mov o53, r7;
+
+  mov r7, o65;
+  mov o65, o66;
+  mov o66, o80;
+  mov o80, o68;
+  mov o68, r7;
+
+  mov r7, o69;
+  mov o69, o67;
+  mov o67, o82;
+  mov o82, o84;
+  mov o84, r7;
+
+  mov r7, o70;
+  mov o70, o81;
+  mov o81, r7;
+
+  mov r7, o71;
+  mov o71, o83;
+  mov o83, o86;
+  mov o86, o85;
+  mov o85, r7;
+
+  mov r7, o97;
+  mov o97, o98;
+  mov o98, o112;
+  mov o112, o100;
+  mov o100, r7;
+
+  mov r7, o101;
+  mov o101, o99;
+  mov o99, o114;
+  mov o114, o116;
+  mov o116, r7;
+
+  mov r7, o102;
+  mov o102, o113;
+  mov o113, r7;
+
+  mov r7, o103;
+  mov o103, o115;
+  mov o115, o118;
+  mov o118, o117;
+  mov o117, r7;
+
+
+  br PEST_EndOfAspectRatios;
+ }
+ PEST_AspectRatio_8_x_2:
+ {
+#line 633 "services4/srvclient/devices/sgx/subtwiddled_eot.asm"
+  mov r7, o1;
+  mov o1, o2;
+  mov o2, o8;
+  mov o8, o4;
+  mov o4, r7;
+
+  mov r7, o5;
+  mov o5, o3;
+  mov o3, o10;
+  mov o10, o12;
+  mov o12, r7;
+
+  mov r7, o9;
+  mov o9, o6;
+  mov o6, r7;
+
+  mov r7, o13;
+  mov o13, o7;
+  mov o7, o11;
+  mov o11, o14;
+  mov o14, r7;
+
+
+  br PEST_EndOfAspectRatios;
+ }
+ PEST_AspectRatio_8_x_4:
+ {
+#line 706 "services4/srvclient/devices/sgx/subtwiddled_eot.asm"
+  mov r7, o1;
+  mov o1, o2;
+  mov o2, o4;
+  mov o4, r7;
+
+  mov r7, o5;
+  mov o5, o3;
+  mov o3, o6;
+  mov o6, r7;
+
+  mov r7, o8;
+  mov o8, o16;
+  mov o16, r7;
+
+  mov r7, o9;
+  mov o9, o18;
+  mov o18, o12;
+  mov o12, o17;
+  mov o17, o10;
+  mov o10, o20;
+  mov o20, r7;
+
+  mov r7, o13;
+  mov o13, o19;
+  mov o19, o14;
+  mov o14, o21;
+  mov o21, o11;
+  mov o11, o22;
+  mov o22, r7;
+
+  mov r7, o15;
+  mov o15, o23;
+  mov o23, r7;
+
+  mov r7, o25;
+  mov o25, o26;
+  mov o26, o28;
+  mov o28, r7;
+
+  mov r7, o29;
+  mov o29, o27;
+  mov o27, o30;
+  mov o30, r7;
+
+
+  br PEST_EndOfAspectRatios;
+ }
+ PEST_AspectRatio_8_x_8:
+ {
+#line 857 "services4/srvclient/devices/sgx/subtwiddled_eot.asm"
+  mov r7, o1;
+  mov o1, o2;
+  mov o2, o4;
+  mov o4, r7;
+
+  mov r7, o5;
+  mov o5, o3;
+  mov o3, o6;
+  mov o6, r7;
+
+  mov r7, o8;
+  mov o8, o16;
+  mov o16, o32;
+  mov o32, r7;
+
+  mov r7, o9;
+  mov o9, o18;
+  mov o18, o36;
+  mov o36, r7;
+
+  mov r7, o12;
+  mov o12, o17;
+  mov o17, o34;
+  mov o34, r7;
+
+  mov r7, o13;
+  mov o13, o19;
+  mov o19, o38;
+  mov o38, r7;
+
+  mov r7, o10;
+  mov o10, o20;
+  mov o20, o33;
+  mov o33, r7;
+
+  mov r7, o11;
+  mov o11, o22;
+  mov o22, o37;
+  mov o37, r7;
+
+  mov r7, o14;
+  mov o14, o21;
+  mov o21, o35;
+  mov o35, r7;
+
+  mov r7, o15;
+  mov o15, o23;
+  mov o23, o39;
+  mov o39, r7;
+
+  mov r7, o24;
+  mov o24, o48;
+  mov o48, o40;
+  mov o40, r7;
+
+  mov r7, o25;
+  mov o25, o50;
+  mov o50, o44;
+  mov o44, r7;
+
+  mov r7, o28;
+  mov o28, o49;
+  mov o49, o42;
+  mov o42, r7;
+
+  mov r7, o29;
+  mov o29, o51;
+  mov o51, o46;
+  mov o46, r7;
+
+  mov r7, o26;
+  mov o26, o52;
+  mov o52, o41;
+  mov o41, r7;
+
+  mov r7, o27;
+  mov o27, o54;
+  mov o54, o45;
+  mov o45, r7;
+
+  mov r7, o30;
+  mov o30, o53;
+  mov o53, o43;
+  mov o43, r7;
+
+  mov r7, o31;
+  mov o31, o55;
+  mov o55, o47;
+  mov o47, r7;
+
+  mov r7, o57;
+  mov o57, o58;
+  mov o58, o60;
+  mov o60, r7;
+
+  mov r7, o61;
+  mov o61, o59;
+  mov o59, o62;
+  mov o62, r7;
+
+
+  br PEST_EndOfAspectRatios;
+ }
+ PEST_AspectRatio_8_x_16:
+ {
+#line 1168 "services4/srvclient/devices/sgx/subtwiddled_eot.asm"
+  mov r7, o1;
+  mov o1, o2;
+  mov o2, o4;
+  mov o4, r7;
+
+  mov r7, o5;
+  mov o5, o3;
+  mov o3, o6;
+  mov o6, r7;
+
+  mov r7, o8;
+  mov o8, o16;
+  mov o16, o32;
+  mov o32, r7;
+
+  mov r7, o9;
+  mov o9, o18;
+  mov o18, o36;
+  mov o36, r7;
+
+  mov r7, o12;
+  mov o12, o17;
+  mov o17, o34;
+  mov o34, r7;
+
+  mov r7, o13;
+  mov o13, o19;
+  mov o19, o38;
+  mov o38, r7;
+
+  mov r7, o10;
+  mov o10, o20;
+  mov o20, o33;
+  mov o33, r7;
+
+  mov r7, o11;
+  mov o11, o22;
+  mov o22, o37;
+  mov o37, r7;
+
+  mov r7, o14;
+  mov o14, o21;
+  mov o21, o35;
+  mov o35, r7;
+
+  mov r7, o15;
+  mov o15, o23;
+  mov o23, o39;
+  mov o39, r7;
+
+  mov r7, o24;
+  mov o24, o48;
+  mov o48, o40;
+  mov o40, r7;
+
+  mov r7, o25;
+  mov o25, o50;
+  mov o50, o44;
+  mov o44, r7;
+
+  mov r7, o28;
+  mov o28, o49;
+  mov o49, o42;
+  mov o42, r7;
+
+  mov r7, o29;
+  mov o29, o51;
+  mov o51, o46;
+  mov o46, r7;
+
+  mov r7, o26;
+  mov o26, o52;
+  mov o52, o41;
+  mov o41, r7;
+
+  mov r7, o27;
+  mov o27, o54;
+  mov o54, o45;
+  mov o45, r7;
+
+  mov r7, o30;
+  mov o30, o53;
+  mov o53, o43;
+  mov o43, r7;
+
+  mov r7, o31;
+  mov o31, o55;
+  mov o55, o47;
+  mov o47, r7;
+
+  mov r7, o57;
+  mov o57, o58;
+  mov o58, o60;
+  mov o60, r7;
+
+  mov r7, o61;
+  mov o61, o59;
+  mov o59, o62;
+  mov o62, r7;
+
+  mov r7, o65;
+  mov o65, o66;
+  mov o66, o68;
+  mov o68, r7;
+
+  mov r7, o69;
+  mov o69, o67;
+  mov o67, o70;
+  mov o70, r7;
+
+  mov r7, o72;
+  mov o72, o80;
+  mov o80, o96;
+  mov o96, r7;
+
+  mov r7, o73;
+  mov o73, o82;
+  mov o82, o100;
+  mov o100, r7;
+
+  mov r7, o76;
+  mov o76, o81;
+  mov o81, o98;
+  mov o98, r7;
+
+  mov r7, o77;
+  mov o77, o83;
+  mov o83, o102;
+  mov o102, r7;
+
+  mov r7, o74;
+  mov o74, o84;
+  mov o84, o97;
+  mov o97, r7;
+
+  mov r7, o75;
+  mov o75, o86;
+  mov o86, o101;
+  mov o101, r7;
+
+  mov r7, o78;
+  mov o78, o85;
+  mov o85, o99;
+  mov o99, r7;
+
+  mov r7, o79;
+  mov o79, o87;
+  mov o87, o103;
+  mov o103, r7;
+
+  mov r7, o88;
+  mov o88, o112;
+  mov o112, o104;
+  mov o104, r7;
+
+  mov r7, o89;
+  mov o89, o114;
+  mov o114, o108;
+  mov o108, r7;
+
+  mov r7, o92;
+  mov o92, o113;
+  mov o113, o106;
+  mov o106, r7;
+
+  mov r7, o93;
+  mov o93, o115;
+  mov o115, o110;
+  mov o110, r7;
+
+  mov r7, o90;
+  mov o90, o116;
+  mov o116, o105;
+  mov o105, r7;
+
+  mov r7, o91;
+  mov o91, o118;
+  mov o118, o109;
+  mov o109, r7;
+
+  mov r7, o94;
+  mov o94, o117;
+  mov o117, o107;
+  mov o107, r7;
+
+  mov r7, o95;
+  mov o95, o119;
+  mov o119, o111;
+  mov o111, r7;
+
+  mov r7, o121;
+  mov o121, o122;
+  mov o122, o124;
+  mov o124, r7;
+
+  mov r7, o125;
+  mov o125, o123;
+  mov o123, o126;
+  mov o126, r7;
+
+
+  br PEST_EndOfAspectRatios;
+ }
+#line 2155 "services4/srvclient/devices/sgx/subtwiddled_eot.asm"
+ PEST_EndOfAspectRatios:
+#line 2315 "services4/srvclient/devices/sgx/subtwiddled_eot.asm"
+ mov r7, #(1 << 31);
+ and.testnz p0, r6, r7;
+ p0 br PEST_CrossesPipeBoundary;
+ {
+
+
+
+
+  emitpix1 r0, r1;
+
+
+  PixelEventSubTwiddled_Sideband_SinglePipe_Byte:
+  nop;
+
+
+  nop.end;
+ }
+ PEST_CrossesPipeBoundary:
+
+
+
+
+
+ or r1, r1, #(1UL << 24);
+
+
+ mov r7, #(1 << 30);
+ and.testnz p0, r6, r7;
+ p0 br PEST_DirectionNotYFirst;
+ {
+#line 2364 "services4/srvclient/devices/sgx/subtwiddled_eot.asm"
+  and r7, r0, #~(0xFF000FFFU);
+  and r0, r0, #(0xFF000FFFU);
+  shr r7, r7, #(12);
+  imae r7, r10.low, #(16U), r7, u32;
+  shl r7, r7, #(12);
+  or r0, r0, r7;
+
+
+  and r7, r1, #~(0xFF000FFFU);
+  and r1, r1, #(0xFF000FFFU);
+  shr r7, r7, #(12);
+  imae r7, r10.low, #(16U), r7, u32;
+  shl r7, r7, #(12);
+  or r1, r1, r7;
+
+  br PEST_EndDirectionsFirst;
+ }
+ PEST_DirectionNotYFirst:
+ {
+
+
+
+
+
+  and r7, r3, #~(0x00000003U);
+  shr r7, r7, #(2);
+
+  shl r7, r7, #(2);
+  and r8, r6, #(0x0000ffff);
+  imae r8, r8.low, r10.low, #0, u32;
+  shl r8, r8, #1;
+  iadd32 r7, r8.low, r7;
+  shr r7, r7, #(2);
+
+
+
+
+
+  shl r7, r7, #(2);
+  and r3, r3, #(0x00000003U);
+  or r3, r3, r7;
+#line 2425 "services4/srvclient/devices/sgx/subtwiddled_eot.asm"
+  and r7, r0, #~(0xFFFFF000U);
+  and r0, r0, #(0xFFFFF000U);
+  shr r7, r7, #(0);
+  imae r7, r10.low, #(16U), r7, u32;
+  shl r7, r7, #(0);
+  or r0, r0, r7;
+
+
+  and r7, r1, #~(0xFFFFF000U);
+  and r1, r1, #(0xFFFFF000U);
+  shr r7, r7, #(0);
+  imae r7, r10.low, #(16U), r7, u32;
+  shl r7, r7, #(0);
+  or r1, r1, r7;
+
+ }
+ PEST_EndDirectionsFirst:
+
+ PEST_2Pipes_First_:; {; xor.testnz p0, g0, g17; p0 br PEST_2Pipes_First_; };;
+
+
+
+ emitpix1 r0, r1;
+
+
+ PixelEventSubTwiddled_Sideband_2Pipes_First_Byte:
+ nop;
+
+ mov r7, g0; iadd32 r7, r7.low, #(1); and g0, r7, #(3);;
+
+ mov r7, #(1 << 30);
+ and.testnz p0, r6, r7;
+ p0 br PEST_DirectionNotY;
+ {
+#line 2478 "services4/srvclient/devices/sgx/subtwiddled_eot.asm"
+  and r7, r0, #~(0xFF000FFFU);
+  and r0, r0, #(0xFF000FFFU);
+  shr r7, r7, #(12);
+  iadd32 r7, r7.low, #((16U) / 2);
+  shl r7, r7, #(12);
+  or r0, r0, r7;
+
+
+  and r7, r1, #~(0xFF000FFFU);
+  and r1, r1, #(0xFF000FFFU);
+  shr r7, r7, #(12);
+  iadd32 r7, r7.low, #((16U) / 2);
+  shl r7, r7, #(12);
+  or r1, r1, r7;
+
+  br PEST_EndDirections;
+ }
+ PEST_DirectionNotY:
+ {
+
+
+
+
+
+  and r7, r3, #~(0x00000003U);
+  shr r7, r7, #(2);
+
+  shl r7, r7, #(2);
+  and r8, r6, #(0x0000ffff);
+  imae r7, r8.low, #1, r7, u32;
+  shr r7, r7, #(2);
+
+
+
+
+
+  shl r7, r7, #(2);
+  and r3, r3, #(0x00000003U);
+  or r3, r3, r7;
+#line 2537 "services4/srvclient/devices/sgx/subtwiddled_eot.asm"
+  and r7, r0, #~(0xFFFFF000U);
+  and r0, r0, #(0xFFFFF000U);
+  shr r7, r7, #(0);
+  iadd32 r7, r7.low, #((16U) / 2);
+  shl r7, r7, #(0);
+  or r0, r0, r7;
+
+
+  and r7, r1, #~(0xFFFFF000U);
+  and r1, r1, #(0xFFFFF000U);
+  shr r7, r7, #(0);
+  iadd32 r7, r7.low, #((16U) / 2);
+  shl r7, r7, #(0);
+  or r1, r1, r7;
+
+ }
+ PEST_EndDirections:
+
+
+
+
+
+
+ and r1, r1, #(0xFEFFFFFFU);
+
+
+
+ PEST_2Pipes_Second_:; {; xor.testnz p0, g0, g17; p0 br PEST_2Pipes_Second_; };;
+
+
+
+ emitpix1.freep r0, r1;
+
+
+ PixelEventSubTwiddled_Sideband_2Pipes_Second_Byte:
+ nop;
+
+
+ mov r7, g0; iadd32 r7, r7.low, #(1); and g0, r7, #(3);;
+
+ nop.end;
+
+}
+SubTwiddledEnd:

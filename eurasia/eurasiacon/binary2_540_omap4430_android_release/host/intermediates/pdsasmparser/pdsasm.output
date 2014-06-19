@@ -1,0 +1,1021 @@
+Grammar
+
+    0 $accept: program $end
+
+    1 program: /* empty */
+    2        | program instruction SEPERATOR
+    3        | program declaration_class declaration_type identifier_list SEPERATOR
+    4        | program SEPERATOR
+
+    5 declaration_class: CLASS_TEMP
+    6                  | CLASS_DATA
+
+    7 declaration_type: TYPE_DWORD
+    8                 | TYPE_QWORD
+
+    9 identifier_list: identifier_list COMMA identifier
+   10                | identifier
+
+   11 identifier: IDENTIFIER
+   12           | IDENTIFIER EQUALS datastore_bank
+   13           | IDENTIFIER EQUALS datastore_bank OPEN_SQUARE_BRACKET expr CLOSE_SQUARE_BRACKET
+
+   14 datastore_bank: DATABANK0
+   15               | DATABANK1
+
+   16 instruction: opt_predicate OPCODE argument_list
+   17            | IDENTIFIER COLON
+
+   18 opt_predicate: /* empty */
+   19              | P0
+   20              | P1
+   21              | P2
+   22              | IF0
+   23              | IF1
+   24              | ALUZ
+   25              | ALUN
+   26              | NEG P0
+   27              | NEG P1
+   28              | NEG P2
+   29              | NEG IF0
+   30              | NEG IF1
+   31              | NEG ALUZ
+   32              | NEG ALUN
+
+   33 argument_list: /* empty */
+   34              | argument_with_flags
+   35              | argument_list COMMA argument_with_flags
+
+   36 argument_with_flags: argument opt_flags
+
+   37 argument: SPECIAL_REGISTER
+   38         | IDENTIFIER
+   39         | expr
+   40         | P0
+   41         | P1
+   42         | P2
+
+   43 opt_flags: /* empty */
+   44          | LOWFLAG
+   45          | HIGHFLAG
+
+   46 expr: unary_expr
+   47     | expr PLUS unary_expr
+   48     | expr MINUS unary_expr
+   49     | expr TIMES unary_expr
+   50     | expr DIVIDE unary_expr
+   51     | expr LSHIFT unary_expr
+   52     | expr RSHIFT unary_expr
+   53     | expr MODULUS unary_expr
+   54     | expr AND unary_expr
+   55     | expr OR unary_expr
+   56     | expr XOR unary_expr
+
+   57 unary_expr: primary_expr
+   58           | NOT unary_expr
+   59           | MINUS unary_expr
+
+   60 primary_expr: NUMBER
+   61             | OPEN_BRACKET expr CLOSE_BRACKET
+
+
+Terminals, with rules where they appear
+
+$end (0) 0
+error (256)
+OPCODE (258) 16
+IDENTIFIER (259) 11 12 13 17 38
+COLON (260) 17
+COMMA (261) 9 35
+SPECIAL_REGISTER (262) 37
+P0 (263) 19 26 40
+P1 (264) 20 27 41
+P2 (265) 21 28 42
+IF0 (266) 22 29
+IF1 (267) 23 30
+NEG (268) 26 27 28 29 30 31 32
+ALUZ (269) 24 31
+ALUN (270) 25 32
+SEPERATOR (271) 2 3 4
+LOWFLAG (272) 44
+HIGHFLAG (273) 45
+NUMBER (274) 60
+OR (275) 55
+AND (276) 54
+XOR (277) 56
+RSHIFT (278) 52
+LSHIFT (279) 51
+MINUS (280) 48 59
+PLUS (281) 47
+DIVIDE (282) 50
+TIMES (283) 49
+NOT (284) 58
+MODULUS (285) 53
+OPEN_BRACKET (286) 61
+CLOSE_BRACKET (287) 61
+CLASS_TEMP (288) 5
+CLASS_DATA (289) 6
+TYPE_DWORD (290) 7
+TYPE_QWORD (291) 8
+DATABANK0 (292) 14
+DATABANK1 (293) 15
+OPEN_SQUARE_BRACKET (294) 13
+CLOSE_SQUARE_BRACKET (295) 13
+EQUALS (296) 12 13
+
+
+Nonterminals, with rules where they appear
+
+$accept (42)
+    on left: 0
+program (43)
+    on left: 1 2 3 4, on right: 0 2 3 4
+declaration_class (44)
+    on left: 5 6, on right: 3
+declaration_type (45)
+    on left: 7 8, on right: 3
+identifier_list (46)
+    on left: 9 10, on right: 3 9
+identifier (47)
+    on left: 11 12 13, on right: 9 10
+datastore_bank (48)
+    on left: 14 15, on right: 12 13
+instruction (49)
+    on left: 16 17, on right: 2
+opt_predicate (50)
+    on left: 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32, on right:
+    16
+argument_list (51)
+    on left: 33 34 35, on right: 16 35
+argument_with_flags (52)
+    on left: 36, on right: 34 35
+argument (53)
+    on left: 37 38 39 40 41 42, on right: 36
+opt_flags (54)
+    on left: 43 44 45, on right: 36
+expr (55)
+    on left: 46 47 48 49 50 51 52 53 54 55 56, on right: 13 39 47 48
+    49 50 51 52 53 54 55 56 61
+unary_expr (56)
+    on left: 57 58 59, on right: 46 47 48 49 50 51 52 53 54 55 56 58
+    59
+primary_expr (57)
+    on left: 60 61, on right: 57
+
+
+state 0
+
+    0 $accept: . program $end
+
+    $default  reduce using rule 1 (program)
+
+    program  go to state 1
+
+
+state 1
+
+    0 $accept: program . $end
+    2 program: program . instruction SEPERATOR
+    3        | program . declaration_class declaration_type identifier_list SEPERATOR
+    4        | program . SEPERATOR
+
+    $end        shift, and go to state 2
+    IDENTIFIER  shift, and go to state 3
+    P0          shift, and go to state 4
+    P1          shift, and go to state 5
+    P2          shift, and go to state 6
+    IF0         shift, and go to state 7
+    IF1         shift, and go to state 8
+    NEG         shift, and go to state 9
+    ALUZ        shift, and go to state 10
+    ALUN        shift, and go to state 11
+    SEPERATOR   shift, and go to state 12
+    CLASS_TEMP  shift, and go to state 13
+    CLASS_DATA  shift, and go to state 14
+
+    $default  reduce using rule 18 (opt_predicate)
+
+    declaration_class  go to state 15
+    instruction        go to state 16
+    opt_predicate      go to state 17
+
+
+state 2
+
+    0 $accept: program $end .
+
+    $default  accept
+
+
+state 3
+
+   17 instruction: IDENTIFIER . COLON
+
+    COLON  shift, and go to state 18
+
+
+state 4
+
+   19 opt_predicate: P0 .
+
+    $default  reduce using rule 19 (opt_predicate)
+
+
+state 5
+
+   20 opt_predicate: P1 .
+
+    $default  reduce using rule 20 (opt_predicate)
+
+
+state 6
+
+   21 opt_predicate: P2 .
+
+    $default  reduce using rule 21 (opt_predicate)
+
+
+state 7
+
+   22 opt_predicate: IF0 .
+
+    $default  reduce using rule 22 (opt_predicate)
+
+
+state 8
+
+   23 opt_predicate: IF1 .
+
+    $default  reduce using rule 23 (opt_predicate)
+
+
+state 9
+
+   26 opt_predicate: NEG . P0
+   27              | NEG . P1
+   28              | NEG . P2
+   29              | NEG . IF0
+   30              | NEG . IF1
+   31              | NEG . ALUZ
+   32              | NEG . ALUN
+
+    P0    shift, and go to state 19
+    P1    shift, and go to state 20
+    P2    shift, and go to state 21
+    IF0   shift, and go to state 22
+    IF1   shift, and go to state 23
+    ALUZ  shift, and go to state 24
+    ALUN  shift, and go to state 25
+
+
+state 10
+
+   24 opt_predicate: ALUZ .
+
+    $default  reduce using rule 24 (opt_predicate)
+
+
+state 11
+
+   25 opt_predicate: ALUN .
+
+    $default  reduce using rule 25 (opt_predicate)
+
+
+state 12
+
+    4 program: program SEPERATOR .
+
+    $default  reduce using rule 4 (program)
+
+
+state 13
+
+    5 declaration_class: CLASS_TEMP .
+
+    $default  reduce using rule 5 (declaration_class)
+
+
+state 14
+
+    6 declaration_class: CLASS_DATA .
+
+    $default  reduce using rule 6 (declaration_class)
+
+
+state 15
+
+    3 program: program declaration_class . declaration_type identifier_list SEPERATOR
+
+    TYPE_DWORD  shift, and go to state 26
+    TYPE_QWORD  shift, and go to state 27
+
+    declaration_type  go to state 28
+
+
+state 16
+
+    2 program: program instruction . SEPERATOR
+
+    SEPERATOR  shift, and go to state 29
+
+
+state 17
+
+   16 instruction: opt_predicate . OPCODE argument_list
+
+    OPCODE  shift, and go to state 30
+
+
+state 18
+
+   17 instruction: IDENTIFIER COLON .
+
+    $default  reduce using rule 17 (instruction)
+
+
+state 19
+
+   26 opt_predicate: NEG P0 .
+
+    $default  reduce using rule 26 (opt_predicate)
+
+
+state 20
+
+   27 opt_predicate: NEG P1 .
+
+    $default  reduce using rule 27 (opt_predicate)
+
+
+state 21
+
+   28 opt_predicate: NEG P2 .
+
+    $default  reduce using rule 28 (opt_predicate)
+
+
+state 22
+
+   29 opt_predicate: NEG IF0 .
+
+    $default  reduce using rule 29 (opt_predicate)
+
+
+state 23
+
+   30 opt_predicate: NEG IF1 .
+
+    $default  reduce using rule 30 (opt_predicate)
+
+
+state 24
+
+   31 opt_predicate: NEG ALUZ .
+
+    $default  reduce using rule 31 (opt_predicate)
+
+
+state 25
+
+   32 opt_predicate: NEG ALUN .
+
+    $default  reduce using rule 32 (opt_predicate)
+
+
+state 26
+
+    7 declaration_type: TYPE_DWORD .
+
+    $default  reduce using rule 7 (declaration_type)
+
+
+state 27
+
+    8 declaration_type: TYPE_QWORD .
+
+    $default  reduce using rule 8 (declaration_type)
+
+
+state 28
+
+    3 program: program declaration_class declaration_type . identifier_list SEPERATOR
+
+    IDENTIFIER  shift, and go to state 31
+
+    identifier_list  go to state 32
+    identifier       go to state 33
+
+
+state 29
+
+    2 program: program instruction SEPERATOR .
+
+    $default  reduce using rule 2 (program)
+
+
+state 30
+
+   16 instruction: opt_predicate OPCODE . argument_list
+
+    IDENTIFIER        shift, and go to state 34
+    SPECIAL_REGISTER  shift, and go to state 35
+    P0                shift, and go to state 36
+    P1                shift, and go to state 37
+    P2                shift, and go to state 38
+    NUMBER            shift, and go to state 39
+    MINUS             shift, and go to state 40
+    NOT               shift, and go to state 41
+    OPEN_BRACKET      shift, and go to state 42
+
+    $default  reduce using rule 33 (argument_list)
+
+    argument_list        go to state 43
+    argument_with_flags  go to state 44
+    argument             go to state 45
+    expr                 go to state 46
+    unary_expr           go to state 47
+    primary_expr         go to state 48
+
+
+state 31
+
+   11 identifier: IDENTIFIER .
+   12           | IDENTIFIER . EQUALS datastore_bank
+   13           | IDENTIFIER . EQUALS datastore_bank OPEN_SQUARE_BRACKET expr CLOSE_SQUARE_BRACKET
+
+    EQUALS  shift, and go to state 49
+
+    $default  reduce using rule 11 (identifier)
+
+
+state 32
+
+    3 program: program declaration_class declaration_type identifier_list . SEPERATOR
+    9 identifier_list: identifier_list . COMMA identifier
+
+    COMMA      shift, and go to state 50
+    SEPERATOR  shift, and go to state 51
+
+
+state 33
+
+   10 identifier_list: identifier .
+
+    $default  reduce using rule 10 (identifier_list)
+
+
+state 34
+
+   38 argument: IDENTIFIER .
+
+    $default  reduce using rule 38 (argument)
+
+
+state 35
+
+   37 argument: SPECIAL_REGISTER .
+
+    $default  reduce using rule 37 (argument)
+
+
+state 36
+
+   40 argument: P0 .
+
+    $default  reduce using rule 40 (argument)
+
+
+state 37
+
+   41 argument: P1 .
+
+    $default  reduce using rule 41 (argument)
+
+
+state 38
+
+   42 argument: P2 .
+
+    $default  reduce using rule 42 (argument)
+
+
+state 39
+
+   60 primary_expr: NUMBER .
+
+    $default  reduce using rule 60 (primary_expr)
+
+
+state 40
+
+   59 unary_expr: MINUS . unary_expr
+
+    NUMBER        shift, and go to state 39
+    MINUS         shift, and go to state 40
+    NOT           shift, and go to state 41
+    OPEN_BRACKET  shift, and go to state 42
+
+    unary_expr    go to state 52
+    primary_expr  go to state 48
+
+
+state 41
+
+   58 unary_expr: NOT . unary_expr
+
+    NUMBER        shift, and go to state 39
+    MINUS         shift, and go to state 40
+    NOT           shift, and go to state 41
+    OPEN_BRACKET  shift, and go to state 42
+
+    unary_expr    go to state 53
+    primary_expr  go to state 48
+
+
+state 42
+
+   61 primary_expr: OPEN_BRACKET . expr CLOSE_BRACKET
+
+    NUMBER        shift, and go to state 39
+    MINUS         shift, and go to state 40
+    NOT           shift, and go to state 41
+    OPEN_BRACKET  shift, and go to state 42
+
+    expr          go to state 54
+    unary_expr    go to state 47
+    primary_expr  go to state 48
+
+
+state 43
+
+   16 instruction: opt_predicate OPCODE argument_list .
+   35 argument_list: argument_list . COMMA argument_with_flags
+
+    COMMA  shift, and go to state 55
+
+    $default  reduce using rule 16 (instruction)
+
+
+state 44
+
+   34 argument_list: argument_with_flags .
+
+    $default  reduce using rule 34 (argument_list)
+
+
+state 45
+
+   36 argument_with_flags: argument . opt_flags
+
+    LOWFLAG   shift, and go to state 56
+    HIGHFLAG  shift, and go to state 57
+
+    $default  reduce using rule 43 (opt_flags)
+
+    opt_flags  go to state 58
+
+
+state 46
+
+   39 argument: expr .
+   47 expr: expr . PLUS unary_expr
+   48     | expr . MINUS unary_expr
+   49     | expr . TIMES unary_expr
+   50     | expr . DIVIDE unary_expr
+   51     | expr . LSHIFT unary_expr
+   52     | expr . RSHIFT unary_expr
+   53     | expr . MODULUS unary_expr
+   54     | expr . AND unary_expr
+   55     | expr . OR unary_expr
+   56     | expr . XOR unary_expr
+
+    OR       shift, and go to state 59
+    AND      shift, and go to state 60
+    XOR      shift, and go to state 61
+    RSHIFT   shift, and go to state 62
+    LSHIFT   shift, and go to state 63
+    MINUS    shift, and go to state 64
+    PLUS     shift, and go to state 65
+    DIVIDE   shift, and go to state 66
+    TIMES    shift, and go to state 67
+    MODULUS  shift, and go to state 68
+
+    $default  reduce using rule 39 (argument)
+
+
+state 47
+
+   46 expr: unary_expr .
+
+    $default  reduce using rule 46 (expr)
+
+
+state 48
+
+   57 unary_expr: primary_expr .
+
+    $default  reduce using rule 57 (unary_expr)
+
+
+state 49
+
+   12 identifier: IDENTIFIER EQUALS . datastore_bank
+   13           | IDENTIFIER EQUALS . datastore_bank OPEN_SQUARE_BRACKET expr CLOSE_SQUARE_BRACKET
+
+    DATABANK0  shift, and go to state 69
+    DATABANK1  shift, and go to state 70
+
+    datastore_bank  go to state 71
+
+
+state 50
+
+    9 identifier_list: identifier_list COMMA . identifier
+
+    IDENTIFIER  shift, and go to state 31
+
+    identifier  go to state 72
+
+
+state 51
+
+    3 program: program declaration_class declaration_type identifier_list SEPERATOR .
+
+    $default  reduce using rule 3 (program)
+
+
+state 52
+
+   59 unary_expr: MINUS unary_expr .
+
+    $default  reduce using rule 59 (unary_expr)
+
+
+state 53
+
+   58 unary_expr: NOT unary_expr .
+
+    $default  reduce using rule 58 (unary_expr)
+
+
+state 54
+
+   47 expr: expr . PLUS unary_expr
+   48     | expr . MINUS unary_expr
+   49     | expr . TIMES unary_expr
+   50     | expr . DIVIDE unary_expr
+   51     | expr . LSHIFT unary_expr
+   52     | expr . RSHIFT unary_expr
+   53     | expr . MODULUS unary_expr
+   54     | expr . AND unary_expr
+   55     | expr . OR unary_expr
+   56     | expr . XOR unary_expr
+   61 primary_expr: OPEN_BRACKET expr . CLOSE_BRACKET
+
+    OR             shift, and go to state 59
+    AND            shift, and go to state 60
+    XOR            shift, and go to state 61
+    RSHIFT         shift, and go to state 62
+    LSHIFT         shift, and go to state 63
+    MINUS          shift, and go to state 64
+    PLUS           shift, and go to state 65
+    DIVIDE         shift, and go to state 66
+    TIMES          shift, and go to state 67
+    MODULUS        shift, and go to state 68
+    CLOSE_BRACKET  shift, and go to state 73
+
+
+state 55
+
+   35 argument_list: argument_list COMMA . argument_with_flags
+
+    IDENTIFIER        shift, and go to state 34
+    SPECIAL_REGISTER  shift, and go to state 35
+    P0                shift, and go to state 36
+    P1                shift, and go to state 37
+    P2                shift, and go to state 38
+    NUMBER            shift, and go to state 39
+    MINUS             shift, and go to state 40
+    NOT               shift, and go to state 41
+    OPEN_BRACKET      shift, and go to state 42
+
+    argument_with_flags  go to state 74
+    argument             go to state 45
+    expr                 go to state 46
+    unary_expr           go to state 47
+    primary_expr         go to state 48
+
+
+state 56
+
+   44 opt_flags: LOWFLAG .
+
+    $default  reduce using rule 44 (opt_flags)
+
+
+state 57
+
+   45 opt_flags: HIGHFLAG .
+
+    $default  reduce using rule 45 (opt_flags)
+
+
+state 58
+
+   36 argument_with_flags: argument opt_flags .
+
+    $default  reduce using rule 36 (argument_with_flags)
+
+
+state 59
+
+   55 expr: expr OR . unary_expr
+
+    NUMBER        shift, and go to state 39
+    MINUS         shift, and go to state 40
+    NOT           shift, and go to state 41
+    OPEN_BRACKET  shift, and go to state 42
+
+    unary_expr    go to state 75
+    primary_expr  go to state 48
+
+
+state 60
+
+   54 expr: expr AND . unary_expr
+
+    NUMBER        shift, and go to state 39
+    MINUS         shift, and go to state 40
+    NOT           shift, and go to state 41
+    OPEN_BRACKET  shift, and go to state 42
+
+    unary_expr    go to state 76
+    primary_expr  go to state 48
+
+
+state 61
+
+   56 expr: expr XOR . unary_expr
+
+    NUMBER        shift, and go to state 39
+    MINUS         shift, and go to state 40
+    NOT           shift, and go to state 41
+    OPEN_BRACKET  shift, and go to state 42
+
+    unary_expr    go to state 77
+    primary_expr  go to state 48
+
+
+state 62
+
+   52 expr: expr RSHIFT . unary_expr
+
+    NUMBER        shift, and go to state 39
+    MINUS         shift, and go to state 40
+    NOT           shift, and go to state 41
+    OPEN_BRACKET  shift, and go to state 42
+
+    unary_expr    go to state 78
+    primary_expr  go to state 48
+
+
+state 63
+
+   51 expr: expr LSHIFT . unary_expr
+
+    NUMBER        shift, and go to state 39
+    MINUS         shift, and go to state 40
+    NOT           shift, and go to state 41
+    OPEN_BRACKET  shift, and go to state 42
+
+    unary_expr    go to state 79
+    primary_expr  go to state 48
+
+
+state 64
+
+   48 expr: expr MINUS . unary_expr
+
+    NUMBER        shift, and go to state 39
+    MINUS         shift, and go to state 40
+    NOT           shift, and go to state 41
+    OPEN_BRACKET  shift, and go to state 42
+
+    unary_expr    go to state 80
+    primary_expr  go to state 48
+
+
+state 65
+
+   47 expr: expr PLUS . unary_expr
+
+    NUMBER        shift, and go to state 39
+    MINUS         shift, and go to state 40
+    NOT           shift, and go to state 41
+    OPEN_BRACKET  shift, and go to state 42
+
+    unary_expr    go to state 81
+    primary_expr  go to state 48
+
+
+state 66
+
+   50 expr: expr DIVIDE . unary_expr
+
+    NUMBER        shift, and go to state 39
+    MINUS         shift, and go to state 40
+    NOT           shift, and go to state 41
+    OPEN_BRACKET  shift, and go to state 42
+
+    unary_expr    go to state 82
+    primary_expr  go to state 48
+
+
+state 67
+
+   49 expr: expr TIMES . unary_expr
+
+    NUMBER        shift, and go to state 39
+    MINUS         shift, and go to state 40
+    NOT           shift, and go to state 41
+    OPEN_BRACKET  shift, and go to state 42
+
+    unary_expr    go to state 83
+    primary_expr  go to state 48
+
+
+state 68
+
+   53 expr: expr MODULUS . unary_expr
+
+    NUMBER        shift, and go to state 39
+    MINUS         shift, and go to state 40
+    NOT           shift, and go to state 41
+    OPEN_BRACKET  shift, and go to state 42
+
+    unary_expr    go to state 84
+    primary_expr  go to state 48
+
+
+state 69
+
+   14 datastore_bank: DATABANK0 .
+
+    $default  reduce using rule 14 (datastore_bank)
+
+
+state 70
+
+   15 datastore_bank: DATABANK1 .
+
+    $default  reduce using rule 15 (datastore_bank)
+
+
+state 71
+
+   12 identifier: IDENTIFIER EQUALS datastore_bank .
+   13           | IDENTIFIER EQUALS datastore_bank . OPEN_SQUARE_BRACKET expr CLOSE_SQUARE_BRACKET
+
+    OPEN_SQUARE_BRACKET  shift, and go to state 85
+
+    $default  reduce using rule 12 (identifier)
+
+
+state 72
+
+    9 identifier_list: identifier_list COMMA identifier .
+
+    $default  reduce using rule 9 (identifier_list)
+
+
+state 73
+
+   61 primary_expr: OPEN_BRACKET expr CLOSE_BRACKET .
+
+    $default  reduce using rule 61 (primary_expr)
+
+
+state 74
+
+   35 argument_list: argument_list COMMA argument_with_flags .
+
+    $default  reduce using rule 35 (argument_list)
+
+
+state 75
+
+   55 expr: expr OR unary_expr .
+
+    $default  reduce using rule 55 (expr)
+
+
+state 76
+
+   54 expr: expr AND unary_expr .
+
+    $default  reduce using rule 54 (expr)
+
+
+state 77
+
+   56 expr: expr XOR unary_expr .
+
+    $default  reduce using rule 56 (expr)
+
+
+state 78
+
+   52 expr: expr RSHIFT unary_expr .
+
+    $default  reduce using rule 52 (expr)
+
+
+state 79
+
+   51 expr: expr LSHIFT unary_expr .
+
+    $default  reduce using rule 51 (expr)
+
+
+state 80
+
+   48 expr: expr MINUS unary_expr .
+
+    $default  reduce using rule 48 (expr)
+
+
+state 81
+
+   47 expr: expr PLUS unary_expr .
+
+    $default  reduce using rule 47 (expr)
+
+
+state 82
+
+   50 expr: expr DIVIDE unary_expr .
+
+    $default  reduce using rule 50 (expr)
+
+
+state 83
+
+   49 expr: expr TIMES unary_expr .
+
+    $default  reduce using rule 49 (expr)
+
+
+state 84
+
+   53 expr: expr MODULUS unary_expr .
+
+    $default  reduce using rule 53 (expr)
+
+
+state 85
+
+   13 identifier: IDENTIFIER EQUALS datastore_bank OPEN_SQUARE_BRACKET . expr CLOSE_SQUARE_BRACKET
+
+    NUMBER        shift, and go to state 39
+    MINUS         shift, and go to state 40
+    NOT           shift, and go to state 41
+    OPEN_BRACKET  shift, and go to state 42
+
+    expr          go to state 86
+    unary_expr    go to state 47
+    primary_expr  go to state 48
+
+
+state 86
+
+   13 identifier: IDENTIFIER EQUALS datastore_bank OPEN_SQUARE_BRACKET expr . CLOSE_SQUARE_BRACKET
+   47 expr: expr . PLUS unary_expr
+   48     | expr . MINUS unary_expr
+   49     | expr . TIMES unary_expr
+   50     | expr . DIVIDE unary_expr
+   51     | expr . LSHIFT unary_expr
+   52     | expr . RSHIFT unary_expr
+   53     | expr . MODULUS unary_expr
+   54     | expr . AND unary_expr
+   55     | expr . OR unary_expr
+   56     | expr . XOR unary_expr
+
+    OR                    shift, and go to state 59
+    AND                   shift, and go to state 60
+    XOR                   shift, and go to state 61
+    RSHIFT                shift, and go to state 62
+    LSHIFT                shift, and go to state 63
+    MINUS                 shift, and go to state 64
+    PLUS                  shift, and go to state 65
+    DIVIDE                shift, and go to state 66
+    TIMES                 shift, and go to state 67
+    MODULUS               shift, and go to state 68
+    CLOSE_SQUARE_BRACKET  shift, and go to state 87
+
+
+state 87
+
+   13 identifier: IDENTIFIER EQUALS datastore_bank OPEN_SQUARE_BRACKET expr CLOSE_SQUARE_BRACKET .
+
+    $default  reduce using rule 13 (identifier)

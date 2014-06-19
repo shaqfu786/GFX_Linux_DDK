@@ -1,0 +1,1021 @@
+#line 1 "services4/srvclient/devices/sgx/transferqueue_use.asm"
+#line 1 "/home001/myeonggyu.son/omap_ics_release_4AI.1.2_2/android/vendor/ti/GFX_Linux_DDK/eurasia//"
+#line 1 "<built-in>"
+#line 1 "<command-line>"
+#line 1 "./eurasiacon/binary2_540_omap4430_android_release/config.h" 1
+#line 1 "<command-line>" 2
+#line 1 "services4/srvclient/devices/sgx/transferqueue_use.asm"
+#line 33 "services4/srvclient/devices/sgx/transferqueue_use.asm"
+#line 1 "hwdefs/sgxdefs.h" 1
+#line 30 "hwdefs/sgxdefs.h"
+#line 1 "hwdefs/sgxerrata.h" 1
+#line 31 "hwdefs/sgxdefs.h" 2
+#line 1 "hwdefs/sgxfeaturedefs.h" 1
+#line 766 "hwdefs/sgxfeaturedefs.h"
+#line 1 "include4/img_types.h" 1
+#line 39 "include4/img_types.h"
+typedef unsigned int IMG_UINT, *IMG_PUINT;
+typedef signed int IMG_INT, *IMG_PINT;
+
+typedef unsigned char IMG_UINT8, *IMG_PUINT8;
+typedef unsigned char IMG_BYTE, *IMG_PBYTE;
+typedef signed char IMG_INT8, *IMG_PINT8;
+typedef char IMG_CHAR, *IMG_PCHAR;
+
+typedef unsigned short IMG_UINT16, *IMG_PUINT16;
+typedef signed short IMG_INT16, *IMG_PINT16;
+
+typedef unsigned int IMG_UINT32, *IMG_PUINT32;
+typedef signed int IMG_INT32, *IMG_PINT32;
+#line 62 "include4/img_types.h"
+typedef unsigned __int64 IMG_UINT64, *IMG_PUINT64;
+typedef __int64 IMG_INT64, *IMG_PINT64;
+#line 76 "include4/img_types.h"
+typedef float IMG_FLOAT, *IMG_PFLOAT;
+typedef double IMG_DOUBLE, *IMG_PDOUBLE;
+
+
+typedef enum tag_img_bool
+{
+ IMG_FALSE = 0,
+ IMG_TRUE = 1,
+ IMG_FORCE_ALIGN = 0x7FFFFFFF
+} IMG_BOOL, *IMG_PBOOL;
+
+typedef void IMG_VOID, *IMG_PVOID;
+
+typedef IMG_INT32 IMG_RESULT;
+
+
+
+
+
+
+ typedef unsigned int IMG_UINTPTR_T;
+ typedef IMG_UINT32 IMG_SIZE_T;
+
+
+typedef IMG_PVOID IMG_HANDLE;
+
+typedef void** IMG_HVOID, * IMG_PHVOID;
+
+
+
+
+typedef IMG_UINT32 IMG_SID;
+
+typedef IMG_UINT32 IMG_EVENTSID;
+
+
+
+
+
+ typedef IMG_HANDLE IMG_S_HANDLE;
+#line 160 "include4/img_types.h"
+typedef IMG_PVOID IMG_CPU_VIRTADDR;
+
+
+typedef struct _IMG_DEV_VIRTADDR
+{
+
+ IMG_UINT32 uiAddr;
+
+
+} IMG_DEV_VIRTADDR;
+
+typedef IMG_UINT32 IMG_DEVMEM_SIZE_T;
+
+
+typedef struct _IMG_CPU_PHYADDR
+{
+
+ IMG_UINTPTR_T uiAddr;
+} IMG_CPU_PHYADDR;
+
+
+typedef struct _IMG_DEV_PHYADDR
+{
+
+
+ IMG_UINTPTR_T uiAddr;
+
+
+
+
+} IMG_DEV_PHYADDR;
+
+
+typedef struct _IMG_SYS_PHYADDR
+{
+
+ IMG_UINTPTR_T uiAddr;
+} IMG_SYS_PHYADDR;
+
+#line 1 "include4/img_defs.h" 1
+#line 33 "include4/img_defs.h"
+#line 1 "include4/img_types.h" 1
+#line 34 "include4/img_defs.h" 2
+
+typedef enum img_tag_TriStateSwitch
+{
+ IMG_ON = 0x00,
+ IMG_OFF,
+ IMG_IGNORE
+
+} img_TriStateSwitch, * img_pTriStateSwitch;
+#line 86 "include4/img_defs.h"
+typedef char TCHAR, *PTCHAR, *PTSTR;
+#line 200 "include4/img_types.h" 2
+#line 767 "hwdefs/sgxfeaturedefs.h" 2
+
+#line 1 "hwdefs/sgxcoretypes.h" 1
+#line 31 "hwdefs/sgxcoretypes.h"
+typedef enum
+{
+ SGX_CORE_ID_INVALID = 0,
+ SGX_CORE_ID_520 = 1,
+ SGX_CORE_ID_530 = 2,
+ SGX_CORE_ID_531 = 3,
+ SGX_CORE_ID_535 = 4,
+ SGX_CORE_ID_540 = 5,
+ SGX_CORE_ID_541 = 6,
+ SGX_CORE_ID_543 = 7,
+ SGX_CORE_ID_544 = 8,
+ SGX_CORE_ID_545 = 9,
+ SGX_CORE_ID_554 = 10
+} SGX_CORE_ID_TYPE;
+
+typedef struct _SGX_CORE_INFO
+{
+ SGX_CORE_ID_TYPE eID;
+ IMG_UINT32 uiRev;
+} SGX_CORE_INFO, *PSGX_CORE_INFO;
+
+typedef struct _SGX_CORE_BUGS
+{
+
+
+
+
+
+ IMG_UINT32 ui32Flags;
+} SGX_CORE_BUGS, *PSGX_CORE_BUGS;
+
+typedef struct _SGX_CORE_FEATURES
+{
+
+
+
+
+
+ IMG_UINT32 ui32Flags;
+ IMG_UINT32 ui32Flags2;
+
+
+
+ IMG_UINT32 ui32NumMutexes;
+
+
+
+ IMG_UINT32 ui32NumMonitors;
+
+
+
+ IMG_UINT32 ui32TextureStateSize;
+
+
+
+ IMG_UINT32 ui32IterationStateSize;
+
+
+
+ IMG_UINT32 ui32NumUSEPipes;
+
+
+
+
+ IMG_UINT32 ui32NumProgramCounterBits;
+
+
+
+ IMG_UINT32 ui32NumInternalRegisters;
+
+
+
+
+ IMG_UINT32 const* puInvalidSpecialRegistersForNonBitwiseCount;
+
+
+
+
+ IMG_UINT32 const* auInvalidSpecialRegistersForNonBitwise;
+
+
+
+ IMG_CHAR const* pszCoreName;
+} SGX_CORE_FEATURES, *PSGX_CORE_FEATURES;
+
+typedef struct _SGX_CORE_DESC
+{
+
+
+
+ SGX_CORE_ID_TYPE eCoreType;
+
+
+
+
+ IMG_UINT32 ui32CoreRevision;
+
+
+
+ SGX_CORE_BUGS sBugs;
+
+
+
+ const SGX_CORE_FEATURES* psFeatures;
+} SGX_CORE_DESC, *PSGX_CORE_DESC;
+typedef SGX_CORE_DESC const* PCSGX_CORE_DESC;
+#line 769 "hwdefs/sgxfeaturedefs.h" 2
+#line 32 "hwdefs/sgxdefs.h" 2
+#line 46 "hwdefs/sgxdefs.h"
+#line 1 "hwdefs/sgx540defs.h" 1
+#line 47 "hwdefs/sgxdefs.h" 2
+#line 369 "hwdefs/sgxdefs.h"
+#line 1 "hwdefs/sgx540usedefs.h" 1
+#line 370 "hwdefs/sgxdefs.h" 2
+#line 7656 "hwdefs/sgxdefs.h"
+#line 1 "hwdefs/sgxusespecialbankdefs.h" 1
+#line 7657 "hwdefs/sgxdefs.h" 2
+#line 34 "services4/srvclient/devices/sgx/transferqueue_use.asm" 2
+
+.export NormalCpyBlit;
+.export NormalCpyBlitEnd;
+
+.export StrideBlit;
+.export StrideBlitEnd;
+.export StrideHighBlit;
+.export StrideHighBlitEnd;
+
+.export SrcBlendBlit;
+.export SrcBlendBlitEnd;
+.export AccumSrcBlendBlit;
+.export AccumSrcBlendBlitEnd;
+.export PremulSrcBlendBlit;
+.export PremulSrcBlendBlitEnd;
+.export GlobalBlendBlit;
+.export GlobalBlendBlitEnd;
+.export PremulSrcWithGlobalBlendBlit;
+.export PremulSrcWithGlobalBlendBlitEnd;
+.export A2R10G10B10Blit;
+.export A2R10G10B10BlitEnd;
+.export A2B10G10R10Blit;
+.export A2B10G10R10BlitEnd;
+
+.export sRGBBlit;
+.export sRGBBlitEnd;
+
+
+.export A8Blit;
+.export A8BlitEnd;
+
+.export FillBlit;
+.export FillBlitCommand;
+.export FillBlitEnd;
+.export SecondaryUpdate;
+.export SecondaryUpdateEnd;
+.export SecondaryUpdateDMA;
+.export SecondaryUpdateDMAEnd;
+
+
+.export Colour256LUTBlit;
+.export Colour256LUTBlitEnd;
+.export Colour16LUTBlit;
+.export Colour16LUTBlitEnd;
+.export Colour2LUTBlit;
+.export Colour2LUTBlitEnd;
+
+
+.export SourceColourKeyBlit;
+.export SourceColourKeyBlitEnd;
+.export DestColourKeyBlit;
+.export DestColourKeyBlitEnd;
+
+.export VideoProcessBlit3Planar;
+.export VideoProcessBlit3PlanarEnd;
+.export VideoProcessBlit2Planar;
+.export VideoProcessBlit2PlanarEnd;
+.export VideoProcessBlit2Planar;
+.export VideoProcessBlit2PlanarEnd;
+.export VideoProcessBlitPacked;
+.export VideoProcessBlitPackedEnd;
+.export ClearTypeBlendGamma;
+.export ClearTypeBlendGammaEnd;
+.export ClearTypeBlendInvalidGamma;
+.export ClearTypeBlendInvalidGammaEnd;
+
+.export ARGB2NV12YPlane;
+.export ARGB2NV12YPlaneEnd;
+.export ARGB2NV12UVPlane;
+.export ARGB2NV12UVPlaneEnd;
+#line 113 "services4/srvclient/devices/sgx/transferqueue_use.asm"
+.skipinvon;
+
+
+
+
+
+
+NormalCpyBlit:
+{
+ ;
+ mov.end o0, pa0;
+}
+NormalCpyBlitEnd:
+#line 134 "services4/srvclient/devices/sgx/transferqueue_use.asm"
+StrideBlit:
+{
+ nop; nop; nop; nop;
+ ;
+
+ frcp r4, r4;
+ fmad r3, r3, r4, c48;
+ ffrc r4, pa1;
+ fmad r1, r4, r2, c48;
+ fsubflr r5, r1, r1;
+ fmad r1, r1, c52, r5.neg;
+ ffrc r4, pa0;
+ fmad r1, r1, c52, r4;
+ fmad r1, r1, r3, c48;
+ fsubflr r0, r1, r1;
+ fmad r1, r1, c52, r0.neg;
+ fmad r1, r1, c52, r5;
+ frcp r6, r6;
+ fmad r1, r1, r6, c48;
+
+.skipinvoff;
+ smp2d r0, r0, sa0, drc0;
+.skipinvon;
+ wdf drc0;
+ mov.end o0, r0;
+}
+StrideBlitEnd:
+
+
+
+
+
+
+
+StrideHighBlit:
+{
+ nop; nop; nop;
+ nop; nop; nop;
+ ;
+
+ frcp r4, r4;
+ fmad r1, pa1, r2, c48;
+ fsubflr r5, r1, r1;
+ fmad r1, r1, c52, r5.neg;
+ fmad r1, r1, c52, pa0;
+ fmad r1, r1, r3, c48;
+ fsubflr r9, r1, r1;
+ fmad r1, r1, c52, r9.neg;
+ fmad r1, r1, r7, r8;
+ fmad r1, r1, r4, c48;
+ fmad r9, r9, r4, c48;
+ frcp r4, r6;
+ fmad r3, r3, r4, c48;
+ fsubflr r0, r1, r1;
+ fmad r1, r1, c52, r0.neg;
+ fmad r0, r0, c52, r9;
+ fmad r1, r1, c52, r5;
+
+ fmad r1, r1, r3, c48;
+.skipinvoff;
+ smp2d r0, r0, sa0, drc0;
+.skipinvon;
+ wdf drc0;
+ mov.end o0, r0;
+}
+StrideHighBlitEnd:
+#line 218 "services4/srvclient/devices/sgx/transferqueue_use.asm"
+ClearTypeBlendInvalidGamma:
+{
+  ;
+
+
+
+
+
+
+  unpckf32u8 r0, pa1.2;
+  unpckf32u8 r1, sa0.2;
+  fsub.tp|z r1, p0, r1, r0;
+(p0) pckf32u8 r2, pa0.2;
+(!p0) pckf32u8 r2, pa0.1;
+  fmul r2, r2, r1;
+  mov r1, #0x3B808081;
+  fmad r2, r2, r1, r0;
+  pcku8f32 o0.0100, r2;
+
+
+
+
+  unpckf32u8 r0, pa1.1;
+  unpckf32u8 r1, sa0.1;
+  fsub.tp|z r1, p0, r1, r0;
+(p0) pckf32u8 r2, pa0.2;
+(!p0) pckf32u8 r2, pa0.1;
+  fmul r2, r2, r1;
+  mov r1, #0x3B808081;
+  fmad r2, r2, r1, r0;
+  pcku8f32 o0.0010, r2;
+
+
+
+
+  unpckf32u8 r0, pa1.0;
+  unpckf32u8 r1, sa0.0;
+  fsub.tp|z r1, p0, r1, r0;
+(p0) pckf32u8 r2, pa0.2;
+(!p0) pckf32u8 r2, pa0.1;
+  fmul r2, r2, r1;
+  mov r1, #0x3B808081;
+  fmad r2, r2, r1, r0;
+  pcku8f32 o0.0001, r2;
+
+  pcku8u8.end o0.1000, pa1.3;
+
+
+}
+ClearTypeBlendInvalidGammaEnd:
+
+
+ClearTypeBlendGamma:
+{
+  ;
+
+
+
+  mov r0, #0x00010000;
+  pcku8u8 r0.0001, pa1.2;
+  ldab r3, [sa2, r0], drc0;
+
+  mov r1, #0x00010000;
+  pcku8u8 r1.0001, pa1.1;
+  mov r2, #0x00010000;
+  pcku8u8 r2.0001, pa1.0;
+
+  wdf drc0;
+
+
+  ldab r4, [sa2, r1], drc0;
+  pcku8u8 r6.0100, r3.0;
+  sop3 r3, pa0, sa0, r6, s0, 1-s0, add;
+  +alrp one, one;
+  mov r0, #0x00010000;
+  pcku8u8 r0.0001, r3.2;
+  ldab r3, [sa3, r0], drc1;
+
+  wdf drc0;
+
+
+  ldab r5, [sa2, r2], drc0;
+  pcku8u8 r6.0010, r4.0;
+  sop3 r4, pa0, sa0, r6, s0, 1-s0, add;
+  +alrp one, one;
+  mov r1, #0x00010000;
+  pcku8u8 r1.0001, r4.1;
+  ldab r4, [sa3, r1], drc1;
+
+  wdf drc0;
+
+  pcku8u8 r6.0001, r5.0;
+  sop3 r5, pa0, sa0, r6, s0, 1-s0, add;
+  +alrp one, one;
+  mov r2, #0x00010000;
+  pcku8u8 r2.0001, r5.0;
+  ldab r5, [sa3, r2], drc1;
+
+
+
+  mov r6, #0xFF;
+  and r9, pa0, r6;
+  shr r8, pa0, #8;
+  and r8, r8, r6;
+  shr r7, pa0, #16;
+  and r7, r7, r6;
+
+
+  mov r6, #0xFF;
+  and.tnz r1, p0, r7, r6;
+  xor.tz r1, p1, r7, r6;
+
+  wdf drc1;
+
+
+
+
+
+
+(!p1) pcku8u8 o0.0100, r3.0;
+(p1) pcku8u8 o0.0100, sa1.2;
+(!p0) pcku8u8 o0.0100, pa1.2;
+
+
+
+  and.tnz r1, p0, r8, r6;
+  xor.tz r1, p1, r8, r6;
+(!p1) pcku8u8 o0.0010, r4.0;
+(p1) pcku8u8 o0.0010, sa1.1;
+(!p0) pcku8u8 o0.0010, pa1.1;
+
+
+
+  and.tnz r1, p0, r9, r6;
+  xor.tz r1, p1, r9, r6;
+(!p1) pcku8u8 o0.0001, r5.0;
+(p1) pcku8u8 o0.0001, sa1.0;
+(!p0) pcku8u8 o0.0001, pa1.0;
+
+  pcku8u8.end o0.1000, pa1.3;
+}
+ClearTypeBlendGammaEnd:
+
+
+
+SrcBlendBlit:
+{
+ ;
+
+
+ sop2.end o0, pa0, pa1, s1a, s1a.comp, add;
+ +asop2 one, s1a.comp, add;
+}
+SrcBlendBlitEnd:
+#line 380 "services4/srvclient/devices/sgx/transferqueue_use.asm"
+AccumSrcBlendBlit:
+{
+ ;
+
+
+ sop2.end o0, pa0, o0, s1a, s1a.comp, add;
+  +asop2 one, s1a.comp, add;
+}
+AccumSrcBlendBlitEnd:
+
+
+PremulSrcBlendBlit:
+{
+ ;
+
+
+ sopwm.end o0.bytemask1111, pa0, pa1, zero.comp, s1a.comp, add, add;
+}
+PremulSrcBlendBlitEnd:
+
+
+GlobalBlendBlit:
+{
+ ;
+
+
+ sop3.end o0, pa0, pa1, sa0, s2.comp, s0, add;
+  +asop s2a.comp, add;
+}
+GlobalBlendBlitEnd:
+
+PremulSrcWithGlobalBlendBlit:
+{
+ ;
+
+
+ sop3 r0, pa0, pa1, sa0, zero, s0, add;
+  +alrp zero, s2a;
+ sopwm.end o0.bytemask1111, r0, pa1, one, s1a.comp, add, add;
+}
+PremulSrcWithGlobalBlendBlitEnd:
+
+A2R10G10B10Blit:
+{
+ ;
+ shr r0, pa0, #0x00000006;
+ and o0, r0, #0x000003FF;
+ shr r0, pa0, #0x0000000C;
+ and r0, r0, #0x000FFC00;
+ or o0, o0, r0;
+ shl r0, pa1, #0x0000000E;
+ and r0, r0, #0x3FF00000;
+ or o0, o0, r0;
+ and r0, pa1, #0xC0000000;
+ or.end o0, r0, r0;
+}
+A2R10G10B10BlitEnd:
+
+A2B10G10R10Blit:
+{
+ ;
+ shl r0, pa0, #0x00000010;
+ and o0, r0 , #0xFFFF0000;
+ shr r0, pa0, #0x00000014;
+ and r0, r0 , #0x000000FF;
+ or o0, o0 , r0;
+ shr r0, pa0, #0x00000002;
+ and r0, r0 , #0x0000FF00;
+ or.end o0, o0 , r0;
+}
+A2B10G10R10BlitEnd:
+
+
+sRGBBlit:
+{
+ ;
+
+ mov r0, #0x3b4d2e1c;
+ mov r1, #0x414eb852;
+ mov r2, #0x3ed55555;
+ mov r3, #0x3f870a3d;
+ mov r4, #0xbd6147ae;
+
+
+
+
+ unpckf32u8.scale r5, pa0.0;
+ fsub.tp|z p0, r5, r0;
+(!p0) fmad r5, r5, r1, c48;
+(p0) flog r5, r5;
+(p0) fmad r5, r5, r2, c48;
+(p0) fexp r5, r5;
+(p0) fmad r5, r5, r3, r4;
+ pcku8f32.scale o0.0001, r5, r5;
+
+
+ unpckf32u8.scale r5, pa0.1;
+ fsub.tp|z p0, r5, r0;
+(!p0) fmad r5, r5, r1, c48;
+(p0) flog r5, r5;
+(p0) fmad r5, r5, r2, c48;
+(p0) fexp r5, r5;
+(p0) fmad r5, r5, r3, r4;
+ pcku8f32.scale o0.0010, r5, r5;
+
+
+ unpckf32u8.scale r5, pa0.2;
+ fsub.tp|z p0, r5, r0;
+(!p0) fmad r5, r5, r1, c48;
+(p0) flog r5, r5;
+(p0) fmad r5, r5, r2, c48;
+(p0) fexp r5, r5;
+(p0) fmad r5, r5, r3, r4;
+ pcku8f32.scale o0.0100, r5, r5;
+
+
+ unpckf32u8.scale r5, pa0.3;
+ fsub.tp|z p0, r5, r0;
+(!p0) fmad r5, r5, r1, c48;
+(p0) flog r5, r5;
+(p0) fmad r5, r5, r2, c48;
+(p0) fexp r5, r5;
+(p0) fmad r5, r5, r3, r4;
+ pcku8f32.scale.end o0.1000, r5, r5;
+}
+sRGBBlitEnd:
+
+
+
+
+
+
+
+A8Blit:
+{
+ shr.end o0, pa0, #24;
+}A8BlitEnd:
+
+
+
+
+
+
+FillBlit:
+{
+ ;
+FillBlitCommand:
+
+
+ nop.end;
+}
+FillBlitEnd:
+#line 555 "services4/srvclient/devices/sgx/transferqueue_use.asm"
+.export FillRopNotAndNotBlit; .export FillRopNotAndNotBlitEnd; FillRopNotAndNotBlit:; {; ; xor o0 , sa0 , #0xFFFFFFFF; and.end o0 , o0 , ~pa0;; }; FillRopNotAndNotBlitEnd:;
+
+.export FillRopNotAndBlit; .export FillRopNotAndBlitEnd; FillRopNotAndBlit:; {; ; and.end o0 , pa0 , ~sa0 ;; }; FillRopNotAndBlitEnd:;
+.export FillRopNotBlit; .export FillRopNotBlitEnd; FillRopNotBlit:; {; ; xor.end o0 , sa0 , #0xFFFFFFFF;; }; FillRopNotBlitEnd:;
+.export FillRopAndNotBlit; .export FillRopAndNotBlitEnd; FillRopAndNotBlit:; {; ; and.end o0 , sa0 , ~pa0;; }; FillRopAndNotBlitEnd:;
+.export FillRopXorBlit; .export FillRopXorBlitEnd; FillRopXorBlit:; {; ; xor.end o0 , sa0 , pa0;; }; FillRopXorBlitEnd:;
+.export FillRopNotOrNotBlit; .export FillRopNotOrNotBlitEnd; FillRopNotOrNotBlit:; {; ; xor o0 , sa0 , #0xFFFFFFFF; or.end o0 , o0 , ~pa0;; }; FillRopNotOrNotBlitEnd:;
+
+.export FillRopAndBlit; .export FillRopAndBlitEnd; FillRopAndBlit:; {; ; and.end o0 , sa0 , pa0;; }; FillRopAndBlitEnd:;
+.export FillRopNotXorBlit; .export FillRopNotXorBlitEnd; FillRopNotXorBlit:; {; ; xor.end o0 , pa0 , ~sa0;; }; FillRopNotXorBlitEnd:;
+.export FillRopNotOrBlit; .export FillRopNotOrBlitEnd; FillRopNotOrBlit:; {; ; or.end o0 , pa0 , ~sa0;; }; FillRopNotOrBlitEnd:;
+.export FillRopOrNotBlit; .export FillRopOrNotBlitEnd; FillRopOrNotBlit:; {; ; or.end o0 , sa0 , ~pa0;; }; FillRopOrNotBlitEnd:;
+.export FillRopOrBlit; .export FillRopOrBlitEnd; FillRopOrBlit:; {; ; or.end o0 , pa0 , sa0;; }; FillRopOrBlitEnd:;
+.export FillRopNotDBlit; .export FillRopNotDBlitEnd; FillRopNotDBlit:; {; ; xor.end o0 , pa0 , #0xFFFFFFFF;; }; FillRopNotDBlitEnd:;
+#line 582 "services4/srvclient/devices/sgx/transferqueue_use.asm"
+.export RopNotSAndNotDBlit; .export RopNotSAndNotDBlitEnd; RopNotSAndNotDBlit:; {; ; xor r0 , pa0 , #0xFFFFFFFF; and.end o0 , r0 , ~pa1;; }; RopNotSAndNotDBlitEnd:;
+
+
+
+.export RopNotSAndDBlit; .export RopNotSAndDBlitEnd; RopNotSAndDBlit:; {; ; and.end o0 , pa1 , ~pa0;; }; RopNotSAndDBlitEnd:;
+
+
+.export RopNotSBlit; .export RopNotSBlitEnd; RopNotSBlit:; {; ; xor.end o0 , pa0 , #0xFFFFFFFF;; }; RopNotSBlitEnd:;
+
+
+.export RopSAndNotDBlit; .export RopSAndNotDBlitEnd; RopSAndNotDBlit:; {; ; and.end o0 , pa0 , ~pa1;; }; RopSAndNotDBlitEnd:;
+
+
+.export RopNotDBlit; .export RopNotDBlitEnd; RopNotDBlit:; {; ; xor.end o0 , pa1 , #0xFFFFFFFF;; }; RopNotDBlitEnd:;
+
+
+.export RopSXorDBlit; .export RopSXorDBlitEnd; RopSXorDBlit:; {; ; xor.end o0 , pa0 , pa1;; }; RopSXorDBlitEnd:;
+
+
+.export RopNotSOrNotDBlit; .export RopNotSOrNotDBlitEnd; RopNotSOrNotDBlit:; {; ; xor r0 , pa0 , #0xFFFFFFFF; or.end o0 , r0 , ~pa1;; }; RopNotSOrNotDBlitEnd:;
+
+
+
+.export RopSAndDBlit; .export RopSAndDBlitEnd; RopSAndDBlit:; {; ; and.end o0 , pa0 , pa1;; }; RopSAndDBlitEnd:;
+
+
+.export RopNotSXorDBlit; .export RopNotSXorDBlitEnd; RopNotSXorDBlit:; {; ; xor.end o0 , pa1 , ~pa0;; }; RopNotSXorDBlitEnd:;
+
+
+.export RopDBlit; .export RopDBlitEnd; RopDBlit:; {; ; mov.end o0 , pa1;; }; RopDBlitEnd:;
+
+
+.export RopNotSOrDBlit; .export RopNotSOrDBlitEnd; RopNotSOrDBlit:; {; ; or.end o0 , pa1 , ~pa0;; }; RopNotSOrDBlitEnd:;
+
+
+.export RopSBlit; .export RopSBlitEnd; RopSBlit:; {; ; mov.end o0 , pa0;; }; RopSBlitEnd:;
+
+
+.export RopSOrNotDBlit; .export RopSOrNotDBlitEnd; RopSOrNotDBlit:; {; ; or.end o0 , pa0 , ~pa1;; }; RopSOrNotDBlitEnd:;
+
+
+.export RopSOrDBlit; .export RopSOrDBlitEnd; RopSOrDBlit:; {; ; or.end o0 , pa1 , pa0;; }; RopSOrDBlitEnd:;
+
+
+
+
+SecondaryUpdate:
+{
+ ;
+
+ nop.end;
+}
+SecondaryUpdateEnd:
+
+
+SecondaryUpdateDMA:
+{
+ ;
+#line 649 "services4/srvclient/devices/sgx/transferqueue_use.asm"
+ nop.end;
+}
+SecondaryUpdateDMAEnd:
+
+
+
+
+Colour256LUTBlit:
+{
+ ;
+
+ xor r1, r1, r1;
+ pckf32u8.scale r0, pa0, pa0;
+.skipinvoff;
+ smp2d r0, r0, sa0, drc0;
+.skipinvon;
+ wdf drc0;
+ mov.end o0, r0;
+}
+Colour256LUTBlitEnd:
+#line 682 "services4/srvclient/devices/sgx/transferqueue_use.asm"
+Colour16LUTBlit:
+{
+ ;
+
+
+ fmul r0, pa0, sa3;
+ mov r1, #(0x3f000000);
+ fmul r0, r0, r1;
+ ffrc r2, r0;
+ fsub r0, r0, r2;
+ fadd r0, r0, r1;
+ fmul r1, r1, sa3;
+ frcp r1, r1;
+ fmul r0, r0, r1;
+ mov r1, pa1;
+
+.skipinvoff;
+ smp2d r0, r0, sa0, drc0;
+.skipinvon;
+
+
+ mov r1, #(0x40000000);
+ fmul r2, r2, r1;
+ pckf32u8.scale r2, r2, r2;
+ mov r1, #0x80;
+ wdf drc0;
+ and.testz p0, r2, r1;
+ p0 shr r0, r0, #4;
+ and il, r0, #0xf;
+
+ mov.end o0, sa[4 + il];
+}
+Colour16LUTBlitEnd:
+
+Colour2LUTBlit:
+{
+ ;
+
+
+ fmul r2, pa0, sa3;
+ mov r1, #(0x3e000000);
+ fmul r0, r2, r1;
+ ffrc r1, r0;
+ fsub r0, r0, r1;
+ mov r1, #(0x3f000000);
+ fadd r0, r0, r1;
+ mov r1, #(0x41000000);
+ fmul r0, r0, r1;
+ mov r1, sa3;
+ frcp r1, r1;
+ fmul r0, r0, r1;
+ mov r1, pa1;
+
+.skipinvoff;
+ smp2d r0, r0, sa0, drc0;
+.skipinvon;
+
+
+ ffrc r1, r2;
+ fsub r2, r2, r1;
+ pcku16f32 r2, r2, #0;
+ and r2, r2, #0x7;
+ mov r1, #8;
+ xor r2, r2, #0xffffffff;
+ iadd32 r2, r1.low, r2;
+ wdf drc0;
+ shr r0, r0, r2;
+ and il, r0, #1;
+
+ mov.end o0, sa[4 + il];
+}
+Colour2LUTBlitEnd:
+#line 763 "services4/srvclient/devices/sgx/transferqueue_use.asm"
+SourceColourKeyBlit:
+{
+ ;
+
+
+
+
+ xor r0, pa0, sa0;
+ and r0, r0, sa1;
+
+
+
+ movc.i32.testz o0, r0, pa1, pa0;
+
+ nop.end;
+}
+SourceColourKeyBlitEnd:
+
+
+
+
+
+
+
+DestColourKeyBlit:
+{
+ ;
+
+
+
+
+ xor r0, pa1, sa0;
+ and r0, r0, sa1;
+
+
+
+ movc.i32.testz o0, r0, pa0, pa1;
+
+ nop.end;
+}
+DestColourKeyBlitEnd:
+
+
+
+
+
+
+
+.align 2;
+VideoProcessBlit3Planar:
+{
+ ;
+.align 2;
+
+ nop.nosched;
+
+
+
+
+
+ firh.nosched o0, pa0, pa1, pa2, u8, msc, fcs0, #5, #2;
+ firh o0, pa0, pa1, pa2, u8, msc, fcs1, #5, #1;
+ firh.end o0, pa0, pa1, pa2, u8, msc, fcs2, #5, #0;
+}
+VideoProcessBlit3PlanarEnd:
+
+
+
+
+
+
+
+.align 2;
+VideoProcessBlit2Planar:
+{
+ ;
+.align 2;
+
+ nop.nosched;
+
+
+
+
+
+ firh.nosched o0, pa0, pa1, pa1, u8, msc, fcs0, #5, #2;
+ firh o0, pa0, pa1, pa1, u8, msc, fcs1, #5, #1;
+ firh.end o0, pa0, pa1, pa1, u8, msc, fcs2, #5, #0;
+}
+VideoProcessBlit2PlanarEnd:
+#line 860 "services4/srvclient/devices/sgx/transferqueue_use.asm"
+.align 2;
+
+VideoProcessBlitPacked:
+{
+ ;
+.align 2;
+
+ nop.nosched;
+
+
+
+
+
+ firh.nosched o0, pa0, pa0, pa0, u8, msc, fcs0, #5, #2;
+ firh o0, pa0, pa0, pa0, u8, msc, fcs1, #5, #1;
+ firh.end o0, pa0, pa0, pa0, u8, msc, fcs2, #5, #0;
+}
+VideoProcessBlitPackedEnd:
+
+
+
+
+
+
+
+ARGB2NV12YPlane:
+{
+ ;
+
+ firh.end o0, pa0, pa0, pa0, u8, msc, fcs2, #5, #3;
+}
+ARGB2NV12YPlaneEnd:
+
+
+
+
+
+
+
+ARGB2NV12UVPlane:
+{
+    ;
+
+
+
+
+ nop.nosched;
+
+
+ firh o0, pa0, pa0, pa0, u8, msc, fcs1, #7, #0;
+ firh.end o0, pa0, pa0, pa0, u8, msc, fcs2, #5, #1;
+}
+ARGB2NV12UVPlaneEnd:
